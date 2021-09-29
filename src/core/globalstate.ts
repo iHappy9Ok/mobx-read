@@ -7,7 +7,15 @@ import { Reaction, runReactions } from './reaction';
 export const globalState = {
   inBatch: 0,
   UNCHANGED: {},
+  /**
+   * Currently running derivation
+   * 当前正在跟踪的 Derivation
+   */
   trackingDerivation: (null as unknown) as IDerivation,
+   /**
+    * List of scheduled, not yet executed, reactions.
+    * 待重新计算数组
+    */
   pendingReactions: [] as Reaction[],
   runId: 0,
   isRunningReactions: false,

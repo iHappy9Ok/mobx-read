@@ -18,12 +18,18 @@ export class Atom implements IAtom {
   // 上一次被使用时，Derivation 的 runId
   lastAccessedBy = 0;
 
-  // 被使用时触发
+  /**
+   *  被使用时触发
+   * observableValue.get
+   */
   reportObserved() {
+    debugger
     return reportObserved(this);
   }
 
-  // 发生变化时触发
+  /**
+   * 发生变化时触发（更新属性值）
+   */ 
   reportChanged() {
     startBatch();
     // 传播改变

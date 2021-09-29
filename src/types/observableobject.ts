@@ -29,7 +29,12 @@ export class ObservableObjectAdministration {
     return this.values.get(key)!.get();
   }
 
+  /**
+   * when @observable obj = { a: 'good luck' }
+   * key =obj,newValue = { a: 'good luck' }
+   */
   write(key: PropertyKey, newValue: any) {
+    debugger
     const observable = this.values.get(key);
     if (observable instanceof ComputedValue) return;
 
@@ -109,6 +114,8 @@ export function createObservableObject<T>(props: T): T {
         return target[name];
       },
       set(target: any, name: PropertyKey, value: any) {
+        debugger
+        // 校验key
         if (!isPropertyKey(name)) return false;
         set(target, name, value);
         return true;

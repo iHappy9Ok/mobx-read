@@ -6,6 +6,9 @@ import {
 } from '../utils';
 import { startBatch, endBatch } from '../core/globalstate';
 
+/**
+ * Proxy代理对象时，根据属性的不同类型进行劫持
+ */
 export function set(obj: any, key: any, value?: any): void {
   if (arguments.length === 2) {
     startBatch();
