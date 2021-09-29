@@ -40,8 +40,8 @@ function createObservable(v: any, arg2?: any) {
     return observableDecorator.apply(null, arguments);
 
   if (isObservable(v)) return v;
-  if (Array.isArray(v)) return observable.array(v);
-  if (isPlainObject(v)) return observable.object(v);
+  if (Array.isArray(v)) return observable.array(v);   //Proxy as well
+  if (isPlainObject(v)) return observable.object(v);  //Proxy
   return v;
 }
 
