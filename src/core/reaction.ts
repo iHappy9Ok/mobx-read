@@ -6,6 +6,10 @@ import {
 import { IObservable } from './observable';
 import { globalState, endBatch, startBatch } from './globalstate';
 
+
+/**
+ * TODO
+ */
 export class Reaction implements IDerivation {
   observing: IObservable[] = [];
   newObserving: IObservable[] = [];

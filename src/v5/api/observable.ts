@@ -86,6 +86,7 @@ function getEnhancerFromOptions(options: CreateObservableOptions): IEnhancer<any
  */
 function createObservable(v: any, arg2?: any, arg3?: any) {
     debugger
+    
     // @observable someProp;
     if (typeof arguments[1] === "string") {
         return deepDecorator.apply(null, arguments as any)
@@ -166,7 +167,7 @@ const observableFactories: IObservableFactories = {
         return new ObservableValue(value, getEnhancerFromOptions(o), o.name, true, o.equals)
     },
     array<T = any>(initialValues?: T[], options?: CreateObservableOptions): IObservableArray<T> {
-        debugger
+        
         if (arguments.length > 2) incorrectlyUsedAsDecorator("array")
         const o = asCreateObservableOptions(options)
         return createObservableArray(initialValues, getEnhancerFromOptions(o), o.name) as any
@@ -192,7 +193,7 @@ const observableFactories: IObservableFactories = {
         decorators?: { [K in keyof T]: Function },
         options?: CreateObservableOptions
     ): T & IObservableObject {
-        debugger
+        
         if (typeof arguments[1] === "string") incorrectlyUsedAsDecorator("object")
         const o = asCreateObservableOptions(options)
         if (o.proxy === false) { // 不传多余参数 proxy 默认为 true

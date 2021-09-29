@@ -17,7 +17,7 @@ export interface IEnhancer<T> {
 }
 
 export function deepEnhancer(v, _, name) {
-    debugger
+    
     // it is an observable already, done
     if (isObservable(v)) return v
 

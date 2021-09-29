@@ -24,7 +24,7 @@ export default function demo1() {
     // @observable bool = true;
     // @observable num = 4;
     // @computed get mixed() {
-    //   return this.str + '/' + this.num;
+    //   return this.str + '/' + this.num;ƒ
     // }
     // @computed get dbl() {
     //   return this.mixed + '/dbl';

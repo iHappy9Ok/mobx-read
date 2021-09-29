@@ -8,13 +8,17 @@ import { extendObservable } from '../api/extendobservable';
 
 /**
  * 基于values（observable）
+ * adm管理了属性
+ * read, write 方法用于针对属性的读写操作，addObservableProp 用于添加可观察属性，addComputedProp 用于添加计算属性。
  */
 export class ObservableObjectAdministration {
   atom = new Atom();
   isObservableObject = true;
 
   constructor(
-    public target: any,
+    // target保存了观察目标的引用
+    public target: any, 
+    // adm围绕values展开。
     public values = new Map<
       PropertyKey,
       ObservableValue<any> | ComputedValue<any>
@@ -35,12 +39,18 @@ export class ObservableObjectAdministration {
     }
   }
 
+
+  /**
+   * 用于添加可观察属性
+   */
   addObservableProp(propName: PropertyKey, newValue: any) {
-    debugger
     const observable = new ObservableValue(newValue);
+    // 劫持value，变成可观察的，add进values里
     this.values.set(propName, observable);
     newValue = (observable as any).value;
+    // 此处代理的目标的读写属性
     Object.defineProperty(this.target, propName, getObservableConfig(propName));
+    // 发布
     this.atom.reportChanged();
   }
 
@@ -58,7 +68,6 @@ export class ObservableObjectAdministration {
 export function asObservableObject(
   target: any,
 ): ObservableObjectAdministration {
-  debugger
   if (Object.prototype.hasOwnProperty.call(target, $mobx)) return target[$mobx];
   const adm = new ObservableObjectAdministration(target, new Map());
   addHiddenProp(target, $mobx, adm);
@@ -94,6 +103,7 @@ export function createObservableObject<T>(props: T): T {
     {},
     {
       get(target: any, name: PropertyKey) {
+        debugger
         const o = target[$mobx].values.get(name);
         if (o instanceof Atom) return (o as any).get();
         return target[name];

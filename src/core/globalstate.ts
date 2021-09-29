@@ -1,6 +1,9 @@
 import { IDerivation } from './derivation';
 import { Reaction, runReactions } from './reaction';
 
+/**
+ * 全局对象
+ */
 export const globalState = {
   inBatch: 0,
   UNCHANGED: {},

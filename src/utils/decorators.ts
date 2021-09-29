@@ -12,7 +12,6 @@ export type PropertyCreator = (
  */
 export function createPropDecorator(propertyCreator: PropertyCreator) {
   return function decoratorFactory(...args: any[]) {
-    debugger
     let decoratorArgs: any[];
 
     function decorator(

@@ -254,7 +254,7 @@ function logTraceInfo(derivation: IDerivation, observable: IObservable) {
 
         // prettier-ignore
         new Function(
-`debugger;
+`;
 /*
 Tracing '${derivation.name}'
 
