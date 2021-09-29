@@ -16,18 +16,19 @@ export default function demo1() {
   // window.aa = a;
 
   class Store {
-    @observable obj = { a: 1 }
+    // @observable obj = { a: 1 }
     //  obj = observable({a: 1},null,{proxy: false })
     // @observable arr = [2, 3];
     // @observable str = 'hello';
     // @observable bool = true;
     // @observable num = 4;
     // @computed get mixed() {
-    //   return this.str + '/' + this.num;
+    //   return this.str + '/' + this.num;ƒ
     // }
     // @computed get dbl() {
     //   return this.mixed + '/dbl';
     // }
+    @observable obj = { a: 'good luck' }
   }
 
   const store = new Store();
@@ -43,14 +44,8 @@ export default function demo1() {
   // });
 
   autorun(r => {
-    debugger
-    // console.log('auto', store.str, store.obj.a, store.dbl);
-    console.log('auto', store.obj.a);
-    // console.log('auto', toJS(store.arr));
-    
+    console.log('constant', store.obj, store.obj.a);
   });
 
-  // store.str = '1';
-  store.obj.a = 2
-  // store.arr.push(1)
+  store.obj.a = 'bad luck'
 }

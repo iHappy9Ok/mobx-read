@@ -31,7 +31,7 @@ const observableFactories = {
 function createObservable(v: any, arg2?: any) {
   debugger
   console.log(arguments);
-  // @observable someProp; 
+  // @observable someProp;
   if (typeof arg2 === 'string')
     /**
      * 劫持了变量的getset
@@ -52,6 +52,9 @@ Object.keys(observableFactories).forEach(
   name => (observable[name] = observableFactories[name]),
 );
 
+/**
+ * 劫持目标target，生成adm实例
+ */
 export const observableDecorator = createPropDecorator(
   // 初始化时，target指向原型
   (target, prop: PropertyKey, descriptor, _args) => {

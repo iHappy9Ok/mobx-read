@@ -29,7 +29,7 @@ export function autorun(
     view: (r: IReactionPublic) => any, // 数据变化后需要执行的函数，入参为 Reaction
     opts: IAutorunOptions = EMPTY_OBJECT
 ): IReactionDisposer {
-    debugger
+    
     if (process.env.NODE_ENV !== "production") {
         invariant(typeof view === "function", "Autorun expects a function as first argument")
         invariant(

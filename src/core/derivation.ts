@@ -1,6 +1,11 @@
 import { IObservable } from './observable';
 import { globalState } from './globalstate';
 
+
+/**
+ * Derivation 即能够从当前状态「衍生」出来的对象，包括计算值和 Reaction。Mobx 中通过 Derivation 注册响应函数，
+ * 响应函数中所使用到的 Observable 称为它的依赖，依赖过期时 Derivation 会重新执行，更新依赖。
+ */
 export interface IDerivation {
   observing: IObservable[];
   newObserving: IObservable[];
