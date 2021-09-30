@@ -2,8 +2,17 @@ import { IDerivation } from './derivation';
 import { globalState } from './globalstate';
 
 export interface IObservable {
+  /**
+   * 用于实时更新 observable, observer 的依赖关系
+   */
   diffValue: number;
+  /**
+   * 绑定的观察者队列。
+   */
   observers: Set<IDerivation>;
+  /**
+   * 最后消费 observable 的观察者 id
+   */
   lastAccessedBy: number;
 }
 

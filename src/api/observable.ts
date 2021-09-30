@@ -9,6 +9,9 @@ import {
 } from '../types/observableobject';
 import { isPlainObject, isObservable, createPropDecorator } from '../utils';
 
+/**
+ * observable: 响应式数据，最主要的特征是将数据变更信息上报给全局监听器。mobx 使用 IObservable 接口，Atom 类加以抽象。
+ */
 export interface IObservableFactory {
   (value: number | string | null | undefined | boolean): never; // use box
   (target: Object, key: string | symbol, descriptor?: PropertyDescriptor): any; // decorator
