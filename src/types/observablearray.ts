@@ -12,6 +12,13 @@ export interface IObservableArray<T = any> extends Array<T> {
   toJSON(): T[];
 }
 
+
+/**
+ * 改写了数组原型上的一些方法，
+ * 不同于 observableArrayAdministration 实例中变更数据的子属性由 observableValue 实例构成；
+ * observableArrayAdministration 实例中变更的数组项直接通过 enhancer 处理成 observable 实例。
+ * 因为对于数组，观察者只订阅单个数组项变更的情况较少，不像对象需要监控每个属性的变更，两者监控的颗粒度不一样，前者就使用 enhancer 构造 observable 实例，后者通过 ObservableValue 构造 observable 实例。
+ */
 class ObservableArrayAdministration {
   values: any[] = [];
   atom = new Atom();
@@ -32,9 +39,12 @@ class ObservableArrayAdministration {
     } else this.spliceWithArray(newLength, len - newLength);
   }
 
+  /**
+   * 用于一次性变更数组项及数组的长度
+   * 数组项都处理成observable
+   */
   spliceWithArray(index = 0, deleteCount?: number, newItems?: any[]): any[] {
     const len = this.values.length;
-
     if (index > len) index = len;
     else if (index < 0) index = Math.max(0, len + index);
 
@@ -56,10 +66,17 @@ export function createObservableArray<T>(
 ): IObservableArray<T> {
   const adm = new ObservableArrayAdministration();
   addHiddenProp(adm.values, $mobx, adm);
+  /**
+   * Proxy代理整个array，粗颗粒，改写getset
+   */
   const proxy = new Proxy(adm.values, {
     get(target: any, name: any) {
+      debugger
+      // 获取长度
       if (name === 'length') return target[$mobx].getArrayLength();
+      // 获取数组项
       if (isNumberLike(name)) return arrayExtensions.get.call(target, +name);
+      // 一些数组原生方法去调用arrayExtensions上的
       if (arrayExtensions.hasOwnProperty(name)) return arrayExtensions[name];
 
       return isOriginArrayFnName(name)
@@ -67,6 +84,7 @@ export function createObservableArray<T>(
         : target[name];
     },
     set(target: any, name: any, value: any): boolean {
+      debugger
       if (name === 'length') target[$mobx].setArrayLength(value);
       if (isNumberLike(name)) arrayExtensions.set.call(target, +name, value);
       else target[name] = value;
@@ -74,7 +92,7 @@ export function createObservableArray<T>(
       return true;
     },
   });
-
+  // init value
   adm.spliceWithArray(0, 0, initialValues);
   return proxy;
 }

@@ -7,7 +7,7 @@ import { ComputedValue, IComputedValueOptions } from './computedvalue';
 import { extendObservable } from '../api/extendobservable';
 
 /**
- * adm管理了属性
+ * 基于values（observable）
  */
 export class ObservableObjectAdministration {
   atom = new Atom();
