@@ -108,13 +108,13 @@ export function createObservableObject<T>(props: T): T {
     {},
     {
       get(target: any, name: PropertyKey) {
-        debugger
+        // debugger
         const o = target[$mobx].values.get(name);
         if (o instanceof Atom) return (o as any).get();
         return target[name];
       },
       set(target: any, name: PropertyKey, value: any) {
-        debugger
+        // debugger
         // 校验key
         if (!isPropertyKey(name)) return false;
         set(target, name, value);

@@ -16,6 +16,9 @@ export interface IObservable {
   lastAccessedBy: number;
 }
 
+/**
+ * 更新derivation和observable的关系
+ */
 export function reportObserved(observable: IObservable) {
   const derivation = globalState.trackingDerivation;
   if (!derivation) return false;

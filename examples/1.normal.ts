@@ -16,10 +16,10 @@ export default function demo1() {
   // window.aa = a;
 
   class Store {
-    // @observable obj = { a: 'good luck' }
+    @observable obj = { a: 'good luck' }
     //  obj = observable({a: 1},null,{proxy: false })
 
-    @observable arr = [{a:'find me'}, 3];
+    // @observable arr = [{a:'find me'}, 3];
     // @observable str = 'hello';
     // @observable bool = true;
     // @observable num = 4;
@@ -44,10 +44,13 @@ export default function demo1() {
   //   }
   // });
 
-  // autorun(r => {
-  //   console.log('constant', store.obj, store.obj.a);
-  // });
-  console.log(store.arr[1]);
+  autorun(r => {
+    console.log('autorunning', store.obj.a);
+  });
+
+  // console.log(store.arr[1]);
+
+  store.obj = {a: 'bad luck'}
   
 
   // store.obj.a = 'bad luck'

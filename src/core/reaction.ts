@@ -22,6 +22,9 @@ export class Reaction implements IDerivation {
     this.schedule();
   }
 
+  /**
+   * 将此衍生上报到全局队列,并计算（执行）衍生
+   */
   schedule() {
     globalState.pendingReactions.push(this);
     runReactions();

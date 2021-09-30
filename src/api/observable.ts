@@ -32,8 +32,7 @@ const observableFactories = {
 };
 
 function createObservable(v: any, arg2?: any) {
-  debugger
-  console.log(arguments);
+  // debugger
   // @observable someProp;
   if (typeof arg2 === 'string')
     /**
@@ -61,7 +60,7 @@ Object.keys(observableFactories).forEach(
 export const observableDecorator = createPropDecorator(
   // 初始化时，target指向原型
   (target, prop: PropertyKey, descriptor, _args) => {
-    debugger
+    // debugger
     const initialValue = descriptor
       ? descriptor.initializer
         ? descriptor.initializer.call(target)

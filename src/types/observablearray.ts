@@ -71,7 +71,7 @@ export function createObservableArray<T>(
    */
   const proxy = new Proxy(adm.values, {
     get(target: any, name: any) {
-      debugger
+      // debugger
       // 获取长度
       if (name === 'length') return target[$mobx].getArrayLength();
       // 获取数组项
@@ -84,7 +84,7 @@ export function createObservableArray<T>(
         : target[name];
     },
     set(target: any, name: any, value: any): boolean {
-      debugger
+      // debugger
       if (name === 'length') target[$mobx].setArrayLength(value);
       if (isNumberLike(name)) arrayExtensions.set.call(target, +name, value);
       else target[name] = value;

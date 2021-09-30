@@ -5,6 +5,9 @@ import { Reaction, runReactions } from './reaction';
  * 全局对象
  */
 export const globalState = {
+  /**
+   * 事务层级
+   */
   inBatch: 0,
   UNCHANGED: {},
   /**

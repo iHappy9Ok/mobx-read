@@ -17,6 +17,7 @@ export interface IDerivation {
   newObserving: IObservable[];
   /**
    * 当观察数据变更时，运行的处理逻辑
+   * Reaction 和 ComputedValue各自有不同的实现
    */
   onBecomeStale(): void;
   /**
@@ -26,11 +27,15 @@ export interface IDerivation {
   isStale?: boolean;
 }
 
+/**
+ * 更新 derivation 的状态和依赖关系，同时执行传参 fn 用户端执行逻辑
+ */
 export function trackDerivedFunction<T>(
   derivation: IDerivation,
   f: () => T,
   context: any,
 ) {
+  debugger
   derivation.runId = ++globalState.runId;
   const prevTracking = globalState.trackingDerivation;
   globalState.trackingDerivation = derivation; // 切分支
@@ -40,6 +45,9 @@ export function trackDerivedFunction<T>(
   return result;
 }
 
+/**
+ * 依赖更新
+ */
 function bindDependencies(derivation: IDerivation) {
   const prevObserving = derivation.observing;
   const observing = (derivation.observing = derivation.newObserving);

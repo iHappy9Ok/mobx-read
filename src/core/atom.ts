@@ -28,7 +28,7 @@ export class Atom implements IAtom {
   }
 
   /**
-   * 发生变化时触发（更新属性值）
+   * 发生变化（更新属性值）时触发
    */ 
   reportChanged() {
     startBatch();
