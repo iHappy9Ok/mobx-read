@@ -17,6 +17,7 @@ export default function demo1() {
 
   class Store {
     @observable obj = { a: 'good luck' }
+    @observable obj2 = { b: 'good luck 2' }
     //  obj = observable({a: 1},null,{proxy: false })
 
     // @observable arr = [{a:'find me'}, 3];

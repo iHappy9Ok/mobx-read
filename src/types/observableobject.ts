@@ -34,7 +34,6 @@ export class ObservableObjectAdministration {
    * key =obj,newValue = { a: 'good luck' }
    */
   write(key: PropertyKey, newValue: any) {
-    debugger
     const observable = this.values.get(key);
     if (observable instanceof ComputedValue) return;
 

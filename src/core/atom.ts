@@ -23,7 +23,6 @@ export class Atom implements IAtom {
    * observableValue.get
    */
   reportObserved() {
-    debugger
     return reportObserved(this);
   }
 

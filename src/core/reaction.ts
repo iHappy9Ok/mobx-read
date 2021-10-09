@@ -19,6 +19,7 @@ export class Reaction implements IDerivation {
   constructor(private onInvalidate: () => void) {}
 
   onBecomeStale() {
+    debugger
     this.schedule();
   }
 
@@ -31,12 +32,16 @@ export class Reaction implements IDerivation {
   }
 
   runReaction() {
+    debugger
     if (this.isDisposed) return;
     startBatch();
     this.onInvalidate();
     endBatch();
   }
 
+  /**
+   * 追踪衍生函数内使用到的observablevalue对象
+   */
   track(fn: () => void) {
     if (this.isDisposed) return;
     startBatch();

@@ -28,6 +28,9 @@ export function startBatch() {
   globalState.inBatch++;
 }
 
+/**
+ * 批量处理 Reaction 的执行，避免不必要的重新计算
+ */
 export function endBatch() {
   if (--globalState.inBatch === 0) {
     runReactions();

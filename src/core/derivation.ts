@@ -39,6 +39,10 @@ export function trackDerivedFunction<T>(
   derivation.runId = ++globalState.runId;
   const prevTracking = globalState.trackingDerivation;
   globalState.trackingDerivation = derivation; // 切分支
+  /**
+   * 这里会去调用
+   * @reportObserved
+   */
   const result = f.call(context); // computed 为计算完后的值
   globalState.trackingDerivation = prevTracking;
   bindDependencies(derivation);
@@ -46,7 +50,7 @@ export function trackDerivedFunction<T>(
 }
 
 /**
- * 依赖更新
+ * 依赖更新，derivation.observing <==> observablevalues.observers
  */
 function bindDependencies(derivation: IDerivation) {
   const prevObserving = derivation.observing;
